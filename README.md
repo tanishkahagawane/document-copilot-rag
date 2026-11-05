@@ -1,41 +1,29 @@
-# fullstack-ai-story-builder
+# Document Copilot: SEC Filing Research Assistant
 
-This project is a full-stack interactive storytelling platform built with **FastAPI** (backend) and **React** (frontend). It utilizes **Large Language Models (LLMs)** to dynamically generate branching adventure stories based on user-provided themes.
+## Overview
 
-## Project Overview
+This project is a **full-stack Generative AI** application designed for deep equity research. It enables users to perform **Retrieval-Augmented Generation (RAG)** over SEC filings to obtain grounded answers with citations and chat history.
 
-*   **Backend:** Built with *FastAPI*, featuring asynchronous job processing, database integration with *SQLAlchemy*, and structured data models using *Pydantic*.
-*   **AI Integration:** Uses *LangChain* and *OpenAI* to generate creative, multi-path narratives with winning/losing outcomes.
-*   **Frontend:** A responsive *React* interface for story input, state management, and navigation through story nodes.
-*   **Deployment:** Designed for deployment via platforms like *Choreo*.
+## Tech Stack
+
+*   **Backend:** FastAPI, Python
+*   **Database:** Supabase (PostgreSQL with `pgvector` for vector storage)
+*   **Frontend:** React, TypeScript, Tailwind CSS, shadcn/ui
+*   **AI/Orchestration:** OpenAI API, Pydantic, Docling (for document ingestion)
+*   **Deployment:** Railway
+
+## Architecture Highlights
+
+*   **Ingestion Pipeline:** Uses Docling to convert HTML filings into clean Markdown, followed by hierarchical chunking and embedding generation.
+*   **Hybrid Search:** Combines **semantic vector search** (using `pgvector`) with **full-text search** for keyword relevance.
+*   **Agentic Workflow:** Utilizes a validator pattern to ensure citations are grounded and to maintain high-quality, hallucination-resistant responses.
 
 ## Key Features
 
-*   **Dynamic Generation:** AI-powered story creation based on custom themes.
-*   **Branching Paths:** Multiple story nodes with player-driven choices.
-*   **Background Processing:** Asynchronous story generation using background tasks to manage LLM latency.
-*   **Data Persistence:** Relational database storage for stories, nodes, and session status.
+*   **Citations:** Inline references that link back to the specific source chunks.
+*   **Chat Persistence:** History tracking per user session.
+*   **Authentication:** Secure user login via Supabase Auth.
 
-## Getting Started
+## Project Reference
 
-### Prerequisites
-
-*   Python (managed via *uv*)
-*   Node.js
-*   OpenAI API Key
-
-### Installation
-
-1.  Clone the repository:
-    bash
-    git clone https://github.com/techwithtim/Choose-Your-Own-Adventure-AI
-
-2.  Setup the backend dependencies using *uv*.
-
-3.  Configure your environment variables, specifically the `OPENAI_API_KEY`.
-
-4.  Follow the provided build instructions for both the frontend and backend to launch the application.
-
-## Documentation & Credits
-
-This project was built as a full-stack tutorial by *Tech With Tim*. Reference : https://www.youtube.com/watch?v=_1P0Uqk50Ps&t=5s
+This implementation is based on the guide provided by Dave Ebbelaar: [Build a Full-Stack GenAI Project in 4 Hours (FastAPI, React, Supabase)](https://www.youtube.com/watch?v=kYJj8w7u_y0)
